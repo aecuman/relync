@@ -1,0 +1,49 @@
+@model IEnumerable<Relync2.Models.Property>
+@{ 
+    int count = 0;
+}
+
+                      <table class="table table-responsive">
+                          <thead>
+                              <tr>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Title)
+                                  </th>
+
+
+
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Price)
+                                  </th>
+
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Available)
+                                  </th>
+
+                                  <th></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              @foreach (var itemo in Model)
+                              {
+                                  <tr>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => itemo.Title)
+                                      </td>
+
+
+
+                                      <td>
+                                          @Html.DisplayFor(modelItem => itemo.Currency) @Html.DisplayFor(modelItem => itemo.Price)
+                                      </td>
+
+                                      <td>
+                                          @Html.DisplayFor(modelItem => itemo.Available)
+                                      </td>
+                                      <td>
+                                          <a class="btn btn-default" asp-action="Create" asp-controller="RActivities" asp-route-type="OFFER" asp-route-propertyID="@itemo.Id" asp-route-requestID="@ViewBag.red">OFFER</a>  
+                                      </td>
+                                  </tr>
+                              }
+                          </tbody>
+                      </table>

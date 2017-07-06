@@ -1,0 +1,88 @@
+@model IEnumerable<Relync2.Models.Property>
+
+@{
+    ViewData["Title"] = "Requester";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@await Html.PartialAsync("_Request",(Request)ViewData["req"])
+<h4>Property Offers</h4>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Terms)
+                </th>
+                
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                
+                <th>
+                    @Html.DisplayNameFor(model => model.Available)
+                </th>
+               
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() > 0) {
+@foreach (var item in Model)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Terms)
+            </td>
+            
+            <td>
+               @Html.DisplayFor(modelItem => item.Currency) @item.Price.ToString("#,##0")
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Available)
+            </td>
+            
+            <td>
+                
+              @*  <a class="btn btn-default" asp-action="Create" asp-controller="RActivities"  asp-route-type="ACCEPT" asp-route-propertyID="@item.Id" asp-route-requestID="@ViewData["reqID"]">ACCEPT</a> |*@
+             @if (item.Available == true)
+             {   <a class="btn btn-danger" asp-action="Create" asp-controller="RActivities" asp-route-type="TAKE" asp-route-propertyID="@item.Id" asp-route-requestID="@ViewData["reqID"]">TAKE</a>}
+             else
+             {
+                 <span class="label label-info" title="The property is taken">TAKEN</span> <a class="btn btn-danger btn-sm">Decline</a> 
+             }
+            </td>
+        </tr>
+    }
+
+
+
+        }
+        else
+        {
+            <tr>
+                <th style="font-weight:400;font-size:large" colspan="5">
+                    <div class="text-center">
+                        <p>Offers from Property Owners and Our Proffessional Brokers will be available soon</p>
+                        <small><a class="btn btn-info btn-sm">Download Shortcut and recieve Notifications from relync</a></small>
+                    </div>
+                </th>
+            </tr>
+
+        }
+
+
+
+    </tbody>
+</table>

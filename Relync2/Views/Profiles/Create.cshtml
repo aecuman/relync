@@ -1,0 +1,130 @@
+@model Relync2.Models.Profile
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/lib/Croppie/croppie.min.js"></script>
+<link rel="stylesheet" href="~/lib/Croppie/croppie.css" />
+<script>
+  (function () {
+        function popUpResult(result) {
+            var html
+            if (result.html) {
+                html = result.html;
+            }
+            swal({
+                title: '',
+                html: true,
+                text: html,
+                allowOutsideClick: true
+            });
+        }
+        function demoUpload() {
+            var $uploadCrop;
+            function readfile(input) {
+                if (input.fils && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('.upload-demo').addClass('ready');
+                        $uploadCrop.croppie('bind', {
+                            url: e.target.result
+                        }).then(function () {
+                            console.log('jquery bind complete')
+
+                        });
+
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    swal("Sorry your  reader doesn't support fil reader api")
+
+                }
+
+            }
+            $uploadCrop = $('#upload-demo').croppie({
+                enableExif: true,
+                viewport: {
+                    width: 200,
+                    height: 200,
+                    type: 'circle'
+                },
+                boundary: {
+                    width: 300,
+                    height: 300
+                }
+            });
+            $('#upload').on('change', function () { readfile(this); });
+            $('.upload-result').on('click', function (ev) {
+                $uploadCrop.croppie('result', {
+                    type: 'canvas',
+                    size: 'viewport'
+
+                }).then(function (resp) {
+                    popupResult({ src: resp })
+
+                })
+
+            })
+        }
+    });
+</script>
+
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Request Profile Details</h4>
+        <p>Fill Out your Personal Details in the Form below</p>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Firstname" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Firstname" class="form-control" />
+                <span asp-validation-for="Firstname" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Surname" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Othernames" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Othernames" class="form-control" />
+                <span asp-validation-for="Othernames" class="text-danger"></span>
+            </div>
+        </div>
+      @*  <div class="form-group">
+        <label asp-for="Pic" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Pic" class="form-control" />
+            <span asp-validation-for="Pic" class="text-danger"></span>
+        </div>
+    </div>*@
+       
+        <div class="form-group">
+            <label asp-for="Phonenumber" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Phonenumber" class="form-control" /><small>Confidential</small>
+                <span asp-validation-for="Phonenumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

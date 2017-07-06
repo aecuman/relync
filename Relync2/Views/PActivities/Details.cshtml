@@ -1,0 +1,49 @@
+@model Relync2.Models.Activity
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Activity</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PropertyID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PropertyID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BrokerID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BrokerID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.On)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.On)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,68 @@
+@model IEnumerable<Relync2.Models.Property>
+
+@{
+    ViewData["Title"] = "Provider";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Provider</h2>
+   
+   
+<div class="col-lg-7"> 
+    <ul class="nav nav-pills nav-justified">
+        <li class="active"><a data-toggle="pill" href="#Req">Requests</a></li>
+        <li><a data-toggle="pill" href="#yp">Your Properties</a> </li>        
+    </ul><br />
+
+    <div class="tab-content">
+        <div id="Req" class="tab-pane fade in active">
+          
+            @await  Html.PartialAsync("_RequestList",(IEnumerable<Request>)ViewData["reqList"])
+</div>
+        <div id="yp" class="tab-pane fade">
+            <a class="btn btn-default" asp-controller="Properties" asp-action="Create"> + New Property</a>
+      @await  Html.PartialAsync("_ProviderList",ViewData["prov"])
+        </div>
+        
+    </div>
+   
+ 
+   
+</div>
+                      <div class="col-lg-5">
+                          Properties Accepted or Taken
+                          <table class="table table-responsive">
+                              <thead>
+                                  <tr>
+                                      <th>
+                                          @Html.DisplayNameFor(model => model.Title)
+                                      </th>                                      
+                                                                          
+                                      <th>
+                                          @Html.DisplayNameFor(model => model.Available)
+                                      </th>
+
+                                      <th></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  @foreach (var item in Model)
+                                  {
+                                      <tr>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.Title)
+                                          </td>
+                                          
+                                         
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.Available)
+                                          </td>
+                                          <td>
+                                              <a class="btn btn-default" asp-controller="Properties" asp-action="Details" asp-route-id="@item.Id">Details</a> 
+                                          </td>
+                                          
+                                      </tr>
+                                  }
+                              </tbody>
+                          </table>
+                      </div>

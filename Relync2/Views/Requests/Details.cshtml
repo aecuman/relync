@@ -1,0 +1,79 @@
+@model Relync2.Models.Request
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Request</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ttype)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ttype)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ptype)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ptype)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Currency)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Currency)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Highest)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Highest)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Lowest)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Lowest)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Attributes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Attributes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dated)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

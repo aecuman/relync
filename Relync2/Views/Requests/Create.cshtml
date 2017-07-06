@@ -1,0 +1,93 @@
+@model Relync2.Models.Request
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Make your Request to recieve Offers</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Ttype" class="col-md-2 control-label"></label>
+            <div class="col-md-10">                
+                <select asp-for="Ttype" class="form-control">
+                    <option value="RENT">RENT</option>
+                    <option value="PURCHASE">Purchase</option>
+                </select>
+               @* <input type="radio" asp-for="Ttype" value="RENT" /> RENT
+    <input type="radio" asp-for="Ttype" value="PURCHASE" /> PURCHASE*@
+                <span asp-validation-for="Ttype" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Ptype" class="col-md-2 control-label"></label>
+            <div class="col-md-10 ">
+                <div class="radio-inline">
+                    <input type="radio"  asp-for="Ptype" value="House" />House
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" asp-for="Ptype" value="Commercial" />Commercial
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" asp-for="Ptype" value="Office" />Office
+                </div><br />
+                        <span asp-validation-for="Ptype" class="text-danger"></span>
+                    </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Location" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Currency" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <div class="radio-inline">
+                    <input type="radio" asp-for="Currency" value="UGX" />UGX
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" asp-for="Currency" value="USD" /> USD
+                </div>
+                <br />
+                <span asp-validation-for="Currency" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Highest" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Highest" class="form-control" type="number"/>
+                <span asp-validation-for="Highest" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Lowest" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Lowest" class="form-control" type="number" />
+                <span asp-validation-for="Lowest" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Attributes" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Attributes" class="form-control" rows="2" placeholder="e.g 2 Bedrooms, Parking,large Kitchen "></textarea>
+                <span asp-validation-for="Attributes" class="text-danger"></span>
+            </div>
+        </div>
+      
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Request" class="btn btn-info" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
