@@ -1,8 +1,0 @@
-version: '2'
-
-services:
-  relync2:
-    image: relync2
-    build:
-      context: ./Relync2
-      dockerfile: Dockerfile

@@ -10,7 +10,6 @@
 
   <PropertyGroup>
     <UserSecretsId>aspnet-Relync2-eb0e3e6d-8703-4e3a-8e6c-7793ef7322df</UserSecretsId>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
