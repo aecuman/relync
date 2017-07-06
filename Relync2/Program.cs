@@ -16,6 +16,7 @@ namespace Relync2
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
+                .UseIISIntegration()
                 .Build();
 
             host.Run();
