@@ -75,16 +75,26 @@ namespace Relync2.Controllers
         }
         public IActionResult Requester()
         {
-            // var _requestID = _context.Activity.Where(x=>x.UserID==User.Identity.Name).FirstOrDefault().RequestID;
-            var _request = _context.Request.Where(x => x.UserID == User.Identity.Name && x.Active == true).Last();
+                if (!HasProfile(User.Identity.Name))
+                {
+                    return RedirectToAction(nameof(ProfilesController.Create), "Profiles");
+                }
+                if (!HasRequest(User.Identity.Name))
+                {
+                    return RedirectToAction(nameof(RequestsController.Create), "Requests");
+                }
+                // var _requestID = _context.Activity.Where(x=>x.UserID==User.Identity.Name).FirstOrDefault().RequestID;
+                var _request = _context.Request.Where(x => x.UserID == User.Identity.Name && x.Active == true).Last();
             ViewData["req"] = _request;
             ViewData["reqID"] = _request.id;
             var _offers = _context.Activity.Where(x => x.Type == "OFFER" && x.RequestID == _request.id);
             var _offeredProperties = _context.Property.Where(x => _offers.Any(o => o.PropertyID == x.Id && o.RequestID == _request.id));
             return View(_offeredProperties);
+            
         }
         public IActionResult Provider()
         {
+             
             var _requests = _context.Request.Where(x => x.Active == true);
             ViewData["reqList"] = _requests;
             var _providersPropertys = _context.Property.Where(x => x.UserID == User.Identity.Name);
@@ -94,6 +104,7 @@ namespace Relync2.Controllers
            
            // var _providersRequests = _context.Activity.Where(x => x.Type == "ACCEPT" || x.Type == "TAKE"& _providersPropertys.Any(p=>p.Id==x.PropertyID));
             return View(_providersPropertiesOffered);
+            
         }
         public IActionResult _RequestList()
         {
