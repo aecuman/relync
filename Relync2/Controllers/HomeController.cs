@@ -22,12 +22,39 @@ namespace Relync2.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-               return RedirectToAction("Requester");
+                if (!HasProfile(User.Identity.Name)) {
+                  return  RedirectToAction(nameof(ProfilesController.Create), "Profiles");
+                }
+                if (!HasRequest(User.Identity.Name)) {
+                    return RedirectToAction(nameof(RequestsController.Create), "Requests");
+                }
+                return RedirectToAction("Requester");
+              
             }
             else {return View(); }
             
         }
-
+        public bool HasProfile(string Username) {
+            if (_context.Profile.Where(x => x.Username == Username).Count() >= 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool HasRequest(string Username)
+        {
+            if (_context.Request.Where(x => x.UserID == Username).Count() >= 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
