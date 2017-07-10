@@ -22,6 +22,7 @@
                 <span asp-validation-for="Ttype" class="text-danger"></span>
             </div>
         </div>
+        
         <div class="form-group">
             <label asp-for="Ptype" class="col-md-2 control-label"></label>
             <div class="col-md-10 ">
@@ -78,7 +79,21 @@
                 <span asp-validation-for="Attributes" class="text-danger"></span>
             </div>
         </div>
-      
+        <div class="form-group">
+            <label asp-for="Urgency" class="col-md-2 control-label"></label>
+            <div class="col-md-10 ">
+                <div class="radio-inline">
+                    <input type="radio" asp-for="Urgency" value="Immediately" />Immediately
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" asp-for="Urgency" value="1 Month" />within 1 Month
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" asp-for="Urgency" value="More then 1" />More than 1 Month
+                </div><br />
+                <span asp-validation-for="Ptype" class="text-danger"></span>
+            </div>
+        </div>
         
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

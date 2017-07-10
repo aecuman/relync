@@ -4,6 +4,7 @@
     ViewData["Title"] = "Requester";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="manifest" href="/manifest.json">
 @await Html.PartialAsync("_Request",(Request)ViewData["req"])
 <h4>Property Offers</h4>
 <table class="table">
@@ -74,8 +75,8 @@
             <tr>
                 <th style="font-weight:400;font-size:large" colspan="5">
                     <div class="text-center">
-                        <p>Offers from Property Owners and Our Proffessional Brokers will be available soon</p>
-                        <small><a class="btn btn-info btn-sm">Download Shortcut and recieve Notifications from relync</a></small>
+                        <p class="label label-success">0<span class="text-info"> Offers</span></p><br />
+                   @*     <small>Download Shortcut and recieve Notifications from relync</small><br /><a class="btn btn-info">Download <span class="glyphicon glyphicon-download"></span></a>*@
                     </div>
                 </th>
             </tr>

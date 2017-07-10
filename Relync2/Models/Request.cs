@@ -14,7 +14,8 @@ namespace Relync2.Models
         [Required]
         [Display(Name = "Property Type")]
         public string Ptype { get; set; }
-        
+        [Required]
+        public string Urgency { get; set; }
         public string Location { get; set; }
         [Required(ErrorMessage ="Select the Currency")]
         

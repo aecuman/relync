@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using Relync2.Models;
 using Relync2.Models.AccountViewModels;
 using Relync2.Services;
+using Relync2.Data;
 
 namespace Relync2.Controllers
 {
@@ -24,6 +25,7 @@ namespace Relync2.Controllers
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
         private readonly string _externalCookieScheme;
+        private readonly ApplicationDbContext _context;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -31,6 +33,7 @@ namespace Relync2.Controllers
             IOptions<IdentityCookieOptions> identityCookieOptions,
             IEmailSender emailSender,
             ISmsSender smsSender,
+            ApplicationDbContext context,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
@@ -38,6 +41,7 @@ namespace Relync2.Controllers
             _externalCookieScheme = identityCookieOptions.Value.ExternalCookieAuthenticationScheme;
             _emailSender = emailSender;
             _smsSender = smsSender;
+            _context = context;
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
@@ -113,9 +117,14 @@ namespace Relync2.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
+                var profile = new Profile() { CreatedOn=DateTime.Now, Email=model.Email, Firstname=model.Firstname, Othernames=model.Othernames, Phonenumber=model.Phonenumber,Pic=model.Pic,Surname=model.Surname,Username=model.Username };
                 var result = await _userManager.CreateAsync(user, model.Password);
+                
+                
                 if (result.Succeeded)
                 {
+                    _context.Profile.Add(profile);
+                    _context.SaveChanges();
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
                     // Send an email with this link
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -124,7 +133,7 @@ namespace Relync2.Controllers
                     //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToAction(nameof(ProfilesController.Create),"Profiles"); //RedirectToLocal(returnUrl);
+                    return RedirectToAction(nameof(RequestsController.Create),"Requests"); //RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
             }

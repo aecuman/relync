@@ -28,7 +28,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">relync<span class="badge"><small>BETA</small></span></a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><span style="font-weight:800">relync</span><span class="badge"><small>BETA</small></span></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -76,3 +76,14 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+<script>
+  if ('serviceWorker' in navigator) {
+    console.log("Will the service worker register?");
+    navigator.serviceWorker.register('service-worker.js')
+      .then(function(reg){
+        console.log("Yes, it did.");
+      }).catch(function(err) {
+        console.log("No it didn't. This happened: ", err)
+      });
+  }
+</script>

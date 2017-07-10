@@ -60,7 +60,7 @@ namespace Relync2.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Ttype,Ptype,Location,Currency,Highest,Lowest,Attributes,Active")] Request request)
+        public async Task<IActionResult> Create([Bind("id,Ttype,Ptype,Urgency,Location,Currency,Highest,Lowest,Attributes,Active")] Request request)
         {
             if (ModelState.IsValid)
             {
