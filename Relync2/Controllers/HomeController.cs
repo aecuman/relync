@@ -75,10 +75,7 @@ namespace Relync2.Controllers
         }
         public IActionResult Requester()
         {
-                if (!HasProfile(User.Identity.Name))
-                {
-                    return RedirectToAction(nameof(ProfilesController.Create), "Profiles");
-                }
+               
                 if (!HasRequest(User.Identity.Name))
                 {
                     return RedirectToAction(nameof(RequestsController.Create), "Requests");
